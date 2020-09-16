@@ -1,62 +1,37 @@
-import React from 'react';
-import {GraphQLTaggedNode, QueryRenderer, Variables} from 'react-relay';
-import {Environment} from './Environment';
+import * as React from 'react';
+import {QueryRenderer} from 'react-relay';
+import environment from './Environment';
 
-type Config = {
-  query: GraphQLTaggedNode;
-  queriesParams?: (props: any) => Record<string, unknown> | null;
-  variables?: Variables;
-  loadingView?: React.ReactNode | null;
-};
+import {Text} from 'react-native';
 
-export const createQueryRendererModern = (
-  FragmentComponent: React.ComponentType,
-  config: Config,
-): React.ComponentType => {
+const createQueryRenderer = (FragmentComponent, Component, config) => {
   const {query, queriesParams} = config;
 
-  const QueryRendererWrapper = (wrapperProps) => {
+  const QueryRendererWrapper = () => {
     const variables = queriesParams
-      ? queriesParams(wrapperProps)
+      ? queriesParams(this.props)
       : config.variables;
 
     return (
       <QueryRenderer
-        environment={Environment}
+        environment={environment}
         query={query}
         variables={variables}
-        fetchPolicy={config.fetchPolicy || 'store-or-network'}
-        // eslint-disable-next-line
-        render={({error, props, retry}) => {
-          // eslint-disable-next-line
-          // console.log('QR', {
-          //   displayName: FragmentComponent.displayName,
-          //   configName: environment.configName,
-          //   queryName: getQueryName(query),
-          //   hasData: !!props,
-          // });
+        render={({error, props}) => {
+          if (error) {
+            return <Text>{error.toString()}</Text>;
+          }
 
           if (props) {
-            const fragmentProps = config.getFragmentProps
-              ? config.getFragmentProps(props)
-              : {query: props};
-
-            return <FragmentComponent {...wrapperProps} {...fragmentProps} />;
+            return <FragmentComponent {...this.props} query={props} />;
           }
 
-          if (error) {
-            return null;
-          }
-
-          if (config.loadingView) {
-            return config.loadingView;
-          }
-
-          return null;
+          return <Text>Loading</Text>;
         }}
       />
     );
   };
-
   return QueryRendererWrapper;
 };
+
+export default createQueryRenderer;
