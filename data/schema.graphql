@@ -18,8 +18,7 @@ input ACLInput {
   public: PublicACLInput
 }
 
-# The Any scalar type
- is used in operations and types that involve any type of value.
+# The Any scalar type is used in operations and types that involve any type of value.
 scalar Any
 
 # Use Inline Fragment on Array to get results: https://graphql.org/learn/queries/#inline-fragments
@@ -203,8 +202,7 @@ input BoxInput {
   upperRight: GeoPointInput!
 }
 
-# The Bytes scalar type
- is used in operations and types that involve base 64 binary data.
+# The Bytes scalar type is used in operations and types that involve base 64 binary data.
 scalar Bytes
 
 # The BytesWhereInput input type is used in operations that involve filtering objects by a field of type Bytes.
@@ -358,8 +356,7 @@ type CreateUserPayload {
   clientMutationId: String
 }
 
-# The Date scalar type
- is used in operations and types that involve dates.
+# The Date scalar type is used in operations and types that involve dates.
 scalar Date
 
 # The DateWhereInput input type is used in operations that involve filtering objects by a field of type Date.
@@ -452,8 +449,7 @@ type Element {
   value: Any!
 }
 
-# The File scalar type
- is used in operations and types that involve files.
+# The File scalar type is used in operations and types that involve files.
 scalar File
 
 # The FileInfo object type is used to return the information about files.
@@ -607,8 +603,7 @@ input IdWhereInput {
 input KeyValueInput {
   # The key used to retrieve the value of this entry.
   key: String!
-  # The value of the entry. Could be any type of scalar data
-.
+  # The value of the entry. Could be any type of scalar data.
   value: Any!
 }
 
@@ -720,8 +715,7 @@ input NumberWhereInput {
   notInQueryKey: SelectInput
 }
 
-# The Object scalar type
- is used in operations and types that involve objects.
+# The Object scalar type is used in operations and types that involve objects.
 scalar Object
 
 # The ObjectWhereInput input type is used in operations that involve filtering result by a field of type Object.
@@ -1474,8 +1468,7 @@ type UpdateUserPayload {
   clientMutationId: String
 }
 
-# The `Upload` scalar type
- represents a file upload.
+# The `Upload` scalar type represents a file upload.
 scalar Upload
 
 # The User object type is used in operations that involve outputting objects of User class.
