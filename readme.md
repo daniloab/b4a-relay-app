@@ -5,6 +5,8 @@
 - yarn start
 - yarn ios/android
 
+What you expect to see
+
 ## ios/android
 
 Remember to configure the whole ios/android stack necessary. See [React Native CLI Quickstart](https://reactnative.dev/docs/environment-setup) to understand how to configure it.

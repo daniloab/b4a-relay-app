@@ -1,18 +1,26 @@
 import React from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
-
-import {Header} from 'react-native/Libraries/NewAppScreen';
+import {SafeAreaView, StatusBar, View, Text} from 'react-native';
 
 import Providers from './Providers';
-import Home from "../components/home/Home";
+import PersonRenderer from '../components/home/person/PersonRenderer';
 
 const App = () => {
   return (
     <Providers>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <Header />
-        <Home/>
+        <View
+          style={{
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 100,
+          }}>
+          <Text style={{fontWeight: 'bold', textAlign: 'center'}}>
+            Back4App React Native Relay - Query Renderer List Example
+          </Text>
+          <PersonRenderer />
+        </View>
       </SafeAreaView>
     </Providers>
   );
