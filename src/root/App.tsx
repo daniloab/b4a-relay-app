@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, StatusBar, View, Text} from 'react-native';
 
 import Providers from './Providers';
-import PersonRenderer from '../components/home/person/PersonRenderer';
+import SignUp from "../components/signUp/SignUp";
 
 const App = () => {
   return (
@@ -17,9 +17,9 @@ const App = () => {
             marginTop: 100,
           }}>
           <Text style={{fontWeight: 'bold', textAlign: 'center'}}>
-            Back4App React Native Relay - Query Renderer List Example
+            Back4App React Native Relay - Sign Up Flow
           </Text>
-          <PersonRenderer />
+            <SignUp />
         </View>
       </SafeAreaView>
     </Providers>
