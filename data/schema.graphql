@@ -18,11 +18,119 @@ input ACLInput {
   public: PublicACLInput
 }
 
+# The Animal object type is used in operations that involve outputting objects of Animal class.
+type Animal implements ParseObject & Node {
+  # The ID of an object
+  id: ID!
+  # This is the object id.
+  objectId: ID!
+  # This is the date in which the object was created.
+  createdAt: Date!
+  # This is the date in which the object was las updated.
+  updatedAt: Date!
+  ACL: ACL!
+  # This is the object name.
+  name: String
+}
+
+# A connection to a list of items.
+type AnimalConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [AnimalEdge]
+  # This is the total matched objecs count that is returned when the count flag is set.
+  count: Int!
+}
+
+# An edge in a connection.
+type AnimalEdge {
+  # The item at the end of the edge
+  node: Animal
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# The AnimalOrder input type is used when sorting objects of the Animal class.
+enum AnimalOrder {
+  objectId_ASC
+  objectId_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  ACL_ASC
+  ACL_DESC
+  name_ASC
+  name_DESC
+  id_ASC
+  id_DESC
+}
+
+# Allow to link OR add and link an object of the Animal class.
+input AnimalPointerInput {
+  # Link an existing object from Animal class. You can use either the global or the object id.
+  link: ID
+  # Create and link an object from Animal class.
+  createAndLink: CreateAnimalFieldsInput
+}
+
+# Allow to add, remove, createAndAdd objects of the Animal class into a relation field.
+input AnimalRelationInput {
+  # Add existing objects from the Animal class into the relation. You can use either the global or the object ids.
+  add: [ID!]
+  # Remove existing objects from the Animal class out of the relation. You can use either the global or the object ids.
+  remove: [ID!]
+  # Create and add objects of the Animal class into the relation.
+  createAndAdd: [CreateAnimalFieldsInput!]
+}
+
+# The AnimalRelationWhereInput input type is used in operations that involve filtering objects of Animal class.
+input AnimalRelationWhereInput {
+  # Run a relational/pointer query where at least one child object can match.
+  have: AnimalWhereInput
+  # Run an inverted relational/pointer query where at least one child object can match.
+  haveNot: AnimalWhereInput
+  # Check if the relation/pointer contains objects.
+  exists: Boolean
+}
+
+# The AnimalWhereInput input type is used in operations that involve filtering objects of Animal class.
+input AnimalWhereInput {
+  # This is the object objectId.
+  objectId: IdWhereInput
+  # This is the object createdAt.
+  createdAt: DateWhereInput
+  # This is the object updatedAt.
+  updatedAt: DateWhereInput
+  # This is the object ACL.
+  ACL: ObjectWhereInput
+  # This is the object name.
+  name: StringWhereInput
+  # This is the object id.
+  id: IdWhereInput
+  # This is the OR operator to compound constraints.
+  OR: [AnimalWhereInput!]
+  # This is the AND operator to compound constraints.
+  AND: [AnimalWhereInput!]
+  # This is the NOR operator to compound constraints.
+  NOR: [AnimalWhereInput!]
+}
+
 # The Any scalar type is used in operations and types that involve any type of value.
 scalar Any
 
 # Use Inline Fragment on Array to get results: https://graphql.org/learn/queries/#inline-fragments
-union ArrayResult = Element | Role | User | B4aVehicle
+union ArrayResult =
+    Element
+  | Role
+  | User
+  | Animal
+  | B4aVehicle
+  | Countries
+  | Feedback
+  | Hero
+  | Person
 # The ArrayWhereInput input type is used in operations that involve filtering objects by a field of type Array.
 input ArrayWhereInput {
   # This is the equalTo operator to specify a constraint to select the objects
@@ -257,6 +365,124 @@ type Class {
   schemaFields: [SchemaField!]!
 }
 
+# The Countries object type is used in operations that involve outputting objects of Countries class.
+type Countries implements ParseObject & Node {
+  # The ID of an object
+  id: ID!
+  # This is the object id.
+  objectId: ID!
+  # This is the date in which the object was created.
+  createdAt: Date!
+  # This is the date in which the object was las updated.
+  updatedAt: Date!
+  ACL: ACL!
+  # This is the object Name.
+  Name: String
+}
+
+# A connection to a list of items.
+type CountriesConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [CountriesEdge]
+  # This is the total matched objecs count that is returned when the count flag is set.
+  count: Int!
+}
+
+# An edge in a connection.
+type CountriesEdge {
+  # The item at the end of the edge
+  node: Countries
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# The CountriesOrder input type is used when sorting objects of the Countries class.
+enum CountriesOrder {
+  objectId_ASC
+  objectId_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  ACL_ASC
+  ACL_DESC
+  Name_ASC
+  Name_DESC
+  id_ASC
+  id_DESC
+}
+
+# Allow to link OR add and link an object of the Countries class.
+input CountriesPointerInput {
+  # Link an existing object from Countries class. You can use either the global or the object id.
+  link: ID
+  # Create and link an object from Countries class.
+  createAndLink: CreateCountriesFieldsInput
+}
+
+# Allow to add, remove, createAndAdd objects of the Countries class into a relation field.
+input CountriesRelationInput {
+  # Add existing objects from the Countries class into the relation. You can use either the global or the object ids.
+  add: [ID!]
+  # Remove existing objects from the Countries class out of the relation. You can use either the global or the object ids.
+  remove: [ID!]
+  # Create and add objects of the Countries class into the relation.
+  createAndAdd: [CreateCountriesFieldsInput!]
+}
+
+# The CountriesRelationWhereInput input type is used in operations that involve filtering objects of Countries class.
+input CountriesRelationWhereInput {
+  # Run a relational/pointer query where at least one child object can match.
+  have: CountriesWhereInput
+  # Run an inverted relational/pointer query where at least one child object can match.
+  haveNot: CountriesWhereInput
+  # Check if the relation/pointer contains objects.
+  exists: Boolean
+}
+
+# The CountriesWhereInput input type is used in operations that involve filtering objects of Countries class.
+input CountriesWhereInput {
+  # This is the object objectId.
+  objectId: IdWhereInput
+  # This is the object createdAt.
+  createdAt: DateWhereInput
+  # This is the object updatedAt.
+  updatedAt: DateWhereInput
+  # This is the object ACL.
+  ACL: ObjectWhereInput
+  # This is the object Name.
+  Name: StringWhereInput
+  # This is the object id.
+  id: IdWhereInput
+  # This is the OR operator to compound constraints.
+  OR: [CountriesWhereInput!]
+  # This is the AND operator to compound constraints.
+  AND: [CountriesWhereInput!]
+  # This is the NOR operator to compound constraints.
+  NOR: [CountriesWhereInput!]
+}
+
+# The CreateAnimalFieldsInput input type is used in operations that involve creation of objects in the Animal class.
+input CreateAnimalFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+}
+
+input CreateAnimalInput {
+  # These are the fields that will be used to create the new object.
+  fields: CreateAnimalFieldsInput
+  clientMutationId: String
+}
+
+type CreateAnimalPayload {
+  # This is the created object.
+  animal: Animal!
+  clientMutationId: String
+}
+
 # The CreateB4aVehicleFieldsInput input type is used in operations that involve creation of objects in the B4aVehicle class.
 input CreateB4aVehicleFieldsInput {
   ACL: ACLInput
@@ -294,6 +520,44 @@ type CreateClassPayload {
   clientMutationId: String
 }
 
+# The CreateCountriesFieldsInput input type is used in operations that involve creation of objects in the Countries class.
+input CreateCountriesFieldsInput {
+  ACL: ACLInput
+  # This is the object Name.
+  Name: String
+}
+
+input CreateCountriesInput {
+  # These are the fields that will be used to create the new object.
+  fields: CreateCountriesFieldsInput
+  clientMutationId: String
+}
+
+type CreateCountriesPayload {
+  # This is the created object.
+  countries: Countries!
+  clientMutationId: String
+}
+
+# The CreateFeedbackFieldsInput input type is used in operations that involve creation of objects in the Feedback class.
+input CreateFeedbackFieldsInput {
+  ACL: ACLInput
+  # This is the object author.
+  author: String
+}
+
+input CreateFeedbackInput {
+  # These are the fields that will be used to create the new object.
+  fields: CreateFeedbackFieldsInput
+  clientMutationId: String
+}
+
+type CreateFeedbackPayload {
+  # This is the created object.
+  feedback: Feedback!
+  clientMutationId: String
+}
+
 input CreateFileInput {
   # This is the new file to be created and uploaded.
   upload: Upload!
@@ -303,6 +567,48 @@ input CreateFileInput {
 type CreateFilePayload {
   # This is the created file info.
   fileInfo: FileInfo!
+  clientMutationId: String
+}
+
+# The CreateHeroFieldsInput input type is used in operations that involve creation of objects in the Hero class.
+input CreateHeroFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+  # This is the object height.
+  height: Float
+}
+
+input CreateHeroInput {
+  # These are the fields that will be used to create the new object.
+  fields: CreateHeroFieldsInput
+  clientMutationId: String
+}
+
+type CreateHeroPayload {
+  # This is the created object.
+  hero: Hero!
+  clientMutationId: String
+}
+
+# The CreatePersonFieldsInput input type is used in operations that involve creation of objects in the Person class.
+input CreatePersonFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+  # This is the object salary.
+  salary: Float
+}
+
+input CreatePersonInput {
+  # These are the fields that will be used to create the new object.
+  fields: CreatePersonFieldsInput
+  clientMutationId: String
+}
+
+type CreatePersonPayload {
+  # This is the created object.
+  person: Person!
   clientMutationId: String
 }
 
@@ -395,6 +701,18 @@ input DateWhereInput {
   notInQueryKey: SelectInput
 }
 
+input DeleteAnimalInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteAnimalPayload {
+  # This is the deleted object.
+  animal: Animal!
+  clientMutationId: String
+}
+
 input DeleteB4aVehicleInput {
   # This is the object id. You can use either the global or the object id.
   id: ID!
@@ -416,6 +734,54 @@ input DeleteClassInput {
 type DeleteClassPayload {
   # This is the deleted class.
   class: Class!
+  clientMutationId: String
+}
+
+input DeleteCountriesInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteCountriesPayload {
+  # This is the deleted object.
+  countries: Countries!
+  clientMutationId: String
+}
+
+input DeleteFeedbackInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteFeedbackPayload {
+  # This is the deleted object.
+  feedback: Feedback!
+  clientMutationId: String
+}
+
+input DeleteHeroInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteHeroPayload {
+  # This is the deleted object.
+  hero: Hero!
+  clientMutationId: String
+}
+
+input DeletePersonInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeletePersonPayload {
+  # This is the deleted object.
+  person: Person!
   clientMutationId: String
 }
 
@@ -447,6 +813,105 @@ type DeleteUserPayload {
 type Element {
   # Return the value of the element in the array
   value: Any!
+}
+
+# The Feedback object type is used in operations that involve outputting objects of Feedback class.
+type Feedback implements ParseObject & Node {
+  # The ID of an object
+  id: ID!
+  # This is the object id.
+  objectId: ID!
+  # This is the date in which the object was created.
+  createdAt: Date!
+  # This is the date in which the object was las updated.
+  updatedAt: Date!
+  ACL: ACL!
+  # This is the object author.
+  author: String
+}
+
+# A connection to a list of items.
+type FeedbackConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [FeedbackEdge]
+  # This is the total matched objecs count that is returned when the count flag is set.
+  count: Int!
+}
+
+# An edge in a connection.
+type FeedbackEdge {
+  # The item at the end of the edge
+  node: Feedback
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# The FeedbackOrder input type is used when sorting objects of the Feedback class.
+enum FeedbackOrder {
+  objectId_ASC
+  objectId_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  ACL_ASC
+  ACL_DESC
+  author_ASC
+  author_DESC
+  id_ASC
+  id_DESC
+}
+
+# Allow to link OR add and link an object of the Feedback class.
+input FeedbackPointerInput {
+  # Link an existing object from Feedback class. You can use either the global or the object id.
+  link: ID
+  # Create and link an object from Feedback class.
+  createAndLink: CreateFeedbackFieldsInput
+}
+
+# Allow to add, remove, createAndAdd objects of the Feedback class into a relation field.
+input FeedbackRelationInput {
+  # Add existing objects from the Feedback class into the relation. You can use either the global or the object ids.
+  add: [ID!]
+  # Remove existing objects from the Feedback class out of the relation. You can use either the global or the object ids.
+  remove: [ID!]
+  # Create and add objects of the Feedback class into the relation.
+  createAndAdd: [CreateFeedbackFieldsInput!]
+}
+
+# The FeedbackRelationWhereInput input type is used in operations that involve filtering objects of Feedback class.
+input FeedbackRelationWhereInput {
+  # Run a relational/pointer query where at least one child object can match.
+  have: FeedbackWhereInput
+  # Run an inverted relational/pointer query where at least one child object can match.
+  haveNot: FeedbackWhereInput
+  # Check if the relation/pointer contains objects.
+  exists: Boolean
+}
+
+# The FeedbackWhereInput input type is used in operations that involve filtering objects of Feedback class.
+input FeedbackWhereInput {
+  # This is the object objectId.
+  objectId: IdWhereInput
+  # This is the object createdAt.
+  createdAt: DateWhereInput
+  # This is the object updatedAt.
+  updatedAt: DateWhereInput
+  # This is the object ACL.
+  ACL: ObjectWhereInput
+  # This is the object author.
+  author: StringWhereInput
+  # This is the object id.
+  id: IdWhereInput
+  # This is the OR operator to compound constraints.
+  OR: [FeedbackWhereInput!]
+  # This is the AND operator to compound constraints.
+  AND: [FeedbackWhereInput!]
+  # This is the NOR operator to compound constraints.
+  NOR: [FeedbackWhereInput!]
 }
 
 # The File scalar type is used in operations and types that involve files.
@@ -563,6 +1028,111 @@ input GeoWithinInput {
   centerSphere: CenterSphereInput
 }
 
+# The Hero object type is used in operations that involve outputting objects of Hero class.
+type Hero implements ParseObject & Node {
+  # The ID of an object
+  id: ID!
+  # This is the object id.
+  objectId: ID!
+  # This is the date in which the object was created.
+  createdAt: Date!
+  # This is the date in which the object was las updated.
+  updatedAt: Date!
+  ACL: ACL!
+  # This is the object name.
+  name: String
+  # This is the object height.
+  height: Float
+}
+
+# A connection to a list of items.
+type HeroConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [HeroEdge]
+  # This is the total matched objecs count that is returned when the count flag is set.
+  count: Int!
+}
+
+# An edge in a connection.
+type HeroEdge {
+  # The item at the end of the edge
+  node: Hero
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# The HeroOrder input type is used when sorting objects of the Hero class.
+enum HeroOrder {
+  objectId_ASC
+  objectId_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  ACL_ASC
+  ACL_DESC
+  name_ASC
+  name_DESC
+  height_ASC
+  height_DESC
+  id_ASC
+  id_DESC
+}
+
+# Allow to link OR add and link an object of the Hero class.
+input HeroPointerInput {
+  # Link an existing object from Hero class. You can use either the global or the object id.
+  link: ID
+  # Create and link an object from Hero class.
+  createAndLink: CreateHeroFieldsInput
+}
+
+# Allow to add, remove, createAndAdd objects of the Hero class into a relation field.
+input HeroRelationInput {
+  # Add existing objects from the Hero class into the relation. You can use either the global or the object ids.
+  add: [ID!]
+  # Remove existing objects from the Hero class out of the relation. You can use either the global or the object ids.
+  remove: [ID!]
+  # Create and add objects of the Hero class into the relation.
+  createAndAdd: [CreateHeroFieldsInput!]
+}
+
+# The HeroRelationWhereInput input type is used in operations that involve filtering objects of Hero class.
+input HeroRelationWhereInput {
+  # Run a relational/pointer query where at least one child object can match.
+  have: HeroWhereInput
+  # Run an inverted relational/pointer query where at least one child object can match.
+  haveNot: HeroWhereInput
+  # Check if the relation/pointer contains objects.
+  exists: Boolean
+}
+
+# The HeroWhereInput input type is used in operations that involve filtering objects of Hero class.
+input HeroWhereInput {
+  # This is the object objectId.
+  objectId: IdWhereInput
+  # This is the object createdAt.
+  createdAt: DateWhereInput
+  # This is the object updatedAt.
+  updatedAt: DateWhereInput
+  # This is the object ACL.
+  ACL: ObjectWhereInput
+  # This is the object name.
+  name: StringWhereInput
+  # This is the object height.
+  height: NumberWhereInput
+  # This is the object id.
+  id: IdWhereInput
+  # This is the OR operator to compound constraints.
+  OR: [HeroWhereInput!]
+  # This is the AND operator to compound constraints.
+  AND: [HeroWhereInput!]
+  # This is the NOR operator to compound constraints.
+  NOR: [HeroWhereInput!]
+}
+
 # The IdWhereInput input type is used in operations that involve filtering objects by an id.
 input IdWhereInput {
   # This is the equalTo operator to specify a constraint to select the objects
@@ -645,12 +1215,42 @@ type Mutation {
   updateUser(input: UpdateUserInput!): UpdateUserPayload
   # The deleteUser mutation can be used to delete an object of the User class.
   deleteUser(input: DeleteUserInput!): DeleteUserPayload
+  # The createAnimal mutation can be used to create a new object of the Animal class.
+  createAnimal(input: CreateAnimalInput!): CreateAnimalPayload
+  # The updateAnimal mutation can be used to update an object of the Animal class.
+  updateAnimal(input: UpdateAnimalInput!): UpdateAnimalPayload
+  # The deleteAnimal mutation can be used to delete an object of the Animal class.
+  deleteAnimal(input: DeleteAnimalInput!): DeleteAnimalPayload
   # The createB4aVehicle mutation can be used to create a new object of the B4aVehicle class.
   createB4aVehicle(input: CreateB4aVehicleInput!): CreateB4aVehiclePayload
   # The updateB4aVehicle mutation can be used to update an object of the B4aVehicle class.
   updateB4aVehicle(input: UpdateB4aVehicleInput!): UpdateB4aVehiclePayload
   # The deleteB4aVehicle mutation can be used to delete an object of the B4aVehicle class.
   deleteB4aVehicle(input: DeleteB4aVehicleInput!): DeleteB4aVehiclePayload
+  # The createCountries mutation can be used to create a new object of the Countries class.
+  createCountries(input: CreateCountriesInput!): CreateCountriesPayload
+  # The updateCountries mutation can be used to update an object of the Countries class.
+  updateCountries(input: UpdateCountriesInput!): UpdateCountriesPayload
+  # The deleteCountries mutation can be used to delete an object of the Countries class.
+  deleteCountries(input: DeleteCountriesInput!): DeleteCountriesPayload
+  # The createFeedback mutation can be used to create a new object of the Feedback class.
+  createFeedback(input: CreateFeedbackInput!): CreateFeedbackPayload
+  # The updateFeedback mutation can be used to update an object of the Feedback class.
+  updateFeedback(input: UpdateFeedbackInput!): UpdateFeedbackPayload
+  # The deleteFeedback mutation can be used to delete an object of the Feedback class.
+  deleteFeedback(input: DeleteFeedbackInput!): DeleteFeedbackPayload
+  # The createHero mutation can be used to create a new object of the Hero class.
+  createHero(input: CreateHeroInput!): CreateHeroPayload
+  # The updateHero mutation can be used to update an object of the Hero class.
+  updateHero(input: UpdateHeroInput!): UpdateHeroPayload
+  # The deleteHero mutation can be used to delete an object of the Hero class.
+  deleteHero(input: DeleteHeroInput!): DeleteHeroPayload
+  # The createPerson mutation can be used to create a new object of the Person class.
+  createPerson(input: CreatePersonInput!): CreatePersonPayload
+  # The updatePerson mutation can be used to update an object of the Person class.
+  updatePerson(input: UpdatePersonInput!): UpdatePersonPayload
+  # The deletePerson mutation can be used to delete an object of the Person class.
+  deletePerson(input: DeletePersonInput!): DeletePersonPayload
   # The createFile mutation can be used to create and upload a new file.
   createFile(input: CreateFileInput!): CreateFilePayload
   # The signUp mutation can be used to create and sign up a new user.
@@ -777,6 +1377,111 @@ interface ParseObject {
   ACL: ACL!
 }
 
+# The Person object type is used in operations that involve outputting objects of Person class.
+type Person implements ParseObject & Node {
+  # The ID of an object
+  id: ID!
+  # This is the object id.
+  objectId: ID!
+  # This is the date in which the object was created.
+  createdAt: Date!
+  # This is the date in which the object was las updated.
+  updatedAt: Date!
+  ACL: ACL!
+  # This is the object name.
+  name: String
+  # This is the object salary.
+  salary: Float
+}
+
+# A connection to a list of items.
+type PersonConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [PersonEdge]
+  # This is the total matched objecs count that is returned when the count flag is set.
+  count: Int!
+}
+
+# An edge in a connection.
+type PersonEdge {
+  # The item at the end of the edge
+  node: Person
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# The PersonOrder input type is used when sorting objects of the Person class.
+enum PersonOrder {
+  objectId_ASC
+  objectId_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  ACL_ASC
+  ACL_DESC
+  name_ASC
+  name_DESC
+  salary_ASC
+  salary_DESC
+  id_ASC
+  id_DESC
+}
+
+# Allow to link OR add and link an object of the Person class.
+input PersonPointerInput {
+  # Link an existing object from Person class. You can use either the global or the object id.
+  link: ID
+  # Create and link an object from Person class.
+  createAndLink: CreatePersonFieldsInput
+}
+
+# Allow to add, remove, createAndAdd objects of the Person class into a relation field.
+input PersonRelationInput {
+  # Add existing objects from the Person class into the relation. You can use either the global or the object ids.
+  add: [ID!]
+  # Remove existing objects from the Person class out of the relation. You can use either the global or the object ids.
+  remove: [ID!]
+  # Create and add objects of the Person class into the relation.
+  createAndAdd: [CreatePersonFieldsInput!]
+}
+
+# The PersonRelationWhereInput input type is used in operations that involve filtering objects of Person class.
+input PersonRelationWhereInput {
+  # Run a relational/pointer query where at least one child object can match.
+  have: PersonWhereInput
+  # Run an inverted relational/pointer query where at least one child object can match.
+  haveNot: PersonWhereInput
+  # Check if the relation/pointer contains objects.
+  exists: Boolean
+}
+
+# The PersonWhereInput input type is used in operations that involve filtering objects of Person class.
+input PersonWhereInput {
+  # This is the object objectId.
+  objectId: IdWhereInput
+  # This is the object createdAt.
+  createdAt: DateWhereInput
+  # This is the object updatedAt.
+  updatedAt: DateWhereInput
+  # This is the object ACL.
+  ACL: ObjectWhereInput
+  # This is the object name.
+  name: StringWhereInput
+  # This is the object salary.
+  salary: NumberWhereInput
+  # This is the object id.
+  id: IdWhereInput
+  # This is the OR operator to compound constraints.
+  OR: [PersonWhereInput!]
+  # This is the AND operator to compound constraints.
+  AND: [PersonWhereInput!]
+  # This is the NOR operator to compound constraints.
+  NOR: [PersonWhereInput!]
+}
+
 # The PointerFieldInput is used to specify a field of type pointer for an object class schema.
 input PointerFieldInput {
   # This is the field name.
@@ -861,6 +1566,28 @@ type Query {
     # The read options for the query to be executed.
     options: ReadOptionsInput
   ): UserConnection!
+  # The animal query can be used to get an object of the Animal class by its id.
+  animal(
+    # This is the object id. You can use either the global or the object id.
+    id: ID!
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): Animal!
+  # The animals query can be used to find objects of the Animal class.
+  animals(
+    # These are the conditions that the objects need to match in order to be found.
+    where: AnimalWhereInput
+    # The fields to be used when sorting the data fetched.
+    order: [AnimalOrder!]
+    # This is the number of objects that must be skipped to return.
+    skip: Int
+    after: String
+    first: Int
+    before: String
+    last: Int
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): AnimalConnection!
   # The b4aVehicle query can be used to get an object of the B4aVehicle class by its id.
   b4aVehicle(
     # This is the object id. You can use either the global or the object id.
@@ -883,6 +1610,79 @@ type Query {
     # The read options for the query to be executed.
     options: ReadOptionsInput
   ): B4aVehicleConnection!
+  # The countries query can be used to get an object of the Countries class by its id.
+  countries(
+    # This is the object id. You can use either the global or the object id.
+    id: ID!
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): Countries!
+  # The feedback query can be used to get an object of the Feedback class by its id.
+  feedback(
+    # This is the object id. You can use either the global or the object id.
+    id: ID!
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): Feedback!
+  # The feedbacks query can be used to find objects of the Feedback class.
+  feedbacks(
+    # These are the conditions that the objects need to match in order to be found.
+    where: FeedbackWhereInput
+    # The fields to be used when sorting the data fetched.
+    order: [FeedbackOrder!]
+    # This is the number of objects that must be skipped to return.
+    skip: Int
+    after: String
+    first: Int
+    before: String
+    last: Int
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): FeedbackConnection!
+  # The hero query can be used to get an object of the Hero class by its id.
+  hero(
+    # This is the object id. You can use either the global or the object id.
+    id: ID!
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): Hero!
+  # The heroes query can be used to find objects of the Hero class.
+  heroes(
+    # These are the conditions that the objects need to match in order to be found.
+    where: HeroWhereInput
+    # The fields to be used when sorting the data fetched.
+    order: [HeroOrder!]
+    # This is the number of objects that must be skipped to return.
+    skip: Int
+    after: String
+    first: Int
+    before: String
+    last: Int
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): HeroConnection!
+  # The person query can be used to get an object of the Person class by its id.
+  person(
+    # This is the object id. You can use either the global or the object id.
+    id: ID!
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): Person!
+  # The people query can be used to find objects of the Person class.
+  people(
+    # These are the conditions that the objects need to match in order to be found.
+    where: PersonWhereInput
+    # The fields to be used when sorting the data fetched.
+    order: [PersonOrder!]
+    # This is the number of objects that must be skipped to return.
+    skip: Int
+    after: String
+    first: Int
+    before: String
+    last: Int
+    # The read options for the query to be executed.
+    options: ReadOptionsInput
+  ): PersonConnection!
   # The health query can be used to check if the server is up and running.
   health: Boolean!
   # The viewer query can be used to return the current user data.
@@ -1375,6 +2175,27 @@ input TextInput {
   search: SearchInput!
 }
 
+# The UpdateAnimalFieldsInput input type is used in operations that involve creation of objects in the Animal class.
+input UpdateAnimalFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+}
+
+input UpdateAnimalInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  # These are the fields that will be used to update the object.
+  fields: UpdateAnimalFieldsInput
+  clientMutationId: String
+}
+
+type UpdateAnimalPayload {
+  # This is the updated object.
+  animal: Animal!
+  clientMutationId: String
+}
+
 # The UpdateB4aVehicleFieldsInput input type is used in operations that involve creation of objects in the B4aVehicle class.
 input UpdateB4aVehicleFieldsInput {
   ACL: ACLInput
@@ -1411,6 +2232,94 @@ input UpdateClassInput {
 type UpdateClassPayload {
   # This is the updated class.
   class: Class!
+  clientMutationId: String
+}
+
+# The UpdateCountriesFieldsInput input type is used in operations that involve creation of objects in the Countries class.
+input UpdateCountriesFieldsInput {
+  ACL: ACLInput
+  # This is the object Name.
+  Name: String
+}
+
+input UpdateCountriesInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  # These are the fields that will be used to update the object.
+  fields: UpdateCountriesFieldsInput
+  clientMutationId: String
+}
+
+type UpdateCountriesPayload {
+  # This is the updated object.
+  countries: Countries!
+  clientMutationId: String
+}
+
+# The UpdateFeedbackFieldsInput input type is used in operations that involve creation of objects in the Feedback class.
+input UpdateFeedbackFieldsInput {
+  ACL: ACLInput
+  # This is the object author.
+  author: String
+}
+
+input UpdateFeedbackInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  # These are the fields that will be used to update the object.
+  fields: UpdateFeedbackFieldsInput
+  clientMutationId: String
+}
+
+type UpdateFeedbackPayload {
+  # This is the updated object.
+  feedback: Feedback!
+  clientMutationId: String
+}
+
+# The UpdateHeroFieldsInput input type is used in operations that involve creation of objects in the Hero class.
+input UpdateHeroFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+  # This is the object height.
+  height: Float
+}
+
+input UpdateHeroInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  # These are the fields that will be used to update the object.
+  fields: UpdateHeroFieldsInput
+  clientMutationId: String
+}
+
+type UpdateHeroPayload {
+  # This is the updated object.
+  hero: Hero!
+  clientMutationId: String
+}
+
+# The UpdatePersonFieldsInput input type is used in operations that involve creation of objects in the Person class.
+input UpdatePersonFieldsInput {
+  ACL: ACLInput
+  # This is the object name.
+  name: String
+  # This is the object salary.
+  salary: Float
+}
+
+input UpdatePersonInput {
+  # This is the object id. You can use either the global or the object id.
+  id: ID!
+  # These are the fields that will be used to update the object.
+  fields: UpdatePersonFieldsInput
+  clientMutationId: String
+}
+
+type UpdatePersonPayload {
+  # This is the updated object.
+  person: Person!
   clientMutationId: String
 }
 

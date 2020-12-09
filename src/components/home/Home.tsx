@@ -2,7 +2,10 @@ import React from 'react';
 import {graphql, createFragmentContainer} from 'react-relay';
 import {createQueryRendererModern} from '../../relay';
 import {View, Text} from 'react-native';
-import {Home_query} from "./__generated__/Home_query.graphql";
+import {Home_query} from './__generated__/Home_query.graphql';
+import environment from '../../relay/Environment';
+import HeroRenderer from './hero/HeroRenderer';
+import PersonRenderer from './person/PersonRenderer';
 
 type HomeProps = {
   query: Home_query;
@@ -11,10 +14,14 @@ type HomeProps = {
 const Home = ({query}: HomeProps) => {
   return (
     <View>
-      <Text>API Health: {query.health ? 'Health' : 'Not health' }</Text>
+      <PersonRenderer />
+      <HeroRenderer />
+      <Text>API Health: {query.health ? 'Health' : 'Not health'}</Text>
     </View>
   );
 };
+
+export default Home;
 
 const HomeFragment = createFragmentContainer(Home, {
   query: graphql`
