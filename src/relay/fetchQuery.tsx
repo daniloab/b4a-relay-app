@@ -1,11 +1,19 @@
 import {RequestNode, Variables} from 'relay-runtime';
 import global from '../helpers/Global';
+import {getSessionToken} from '../components/signIn/SignIn';
 
-const TOKEN_KEY = 'token_key';
+export const getToken = async () => {
+  const sessionToken = await getSessionToken();
 
-export const getToken = () => {
-  // get token from cookie or session token instead
-  return localStorage.getItem(TOKEN_KEY);
+  console.log('sessionToken', sessionToken)
+
+  if (sessionToken) {
+    return {
+      'X-Parse-Session-Token': sessionToken,
+    };
+  }
+
+  return {};
 };
 
 const config = {
@@ -18,23 +26,39 @@ const fetchQuery = async (request, variables) => {
     variables,
   });
 
+  const sT = await getToken();
+
   const headers = {
     Accept: 'application/json',
     'Content-type': 'application/json',
     'X-Parse-Application-Id': 'f8pSMPVHNRYMG0jJy8ArJpaa8myO6llMHpTSgG43',
     'X-Parse-Master-Key': 'mGwCt6SFMZYUXK3QufHDlE1nhJkYjH6Xh72KR033',
     'X-Parse-Client-Key': 'ZTfWxTADjeLHRzYn3V7F2XS64XFyBmxgTB1v5PAx',
+    ...await getToken(),
   };
 
-  const response = await fetch(`${config.GRAPHQL_URL}`, {
-    method: 'POST',
-    headers,
-    body,
-  });
+  // headers
+  console.log('headers', headers)
 
-  console.log('response', response);
+  try {
+    const response = await fetch(`${config.GRAPHQL_URL}`, {
+      method: 'POST',
+      headers,
+      body,
+    });
 
-  return await response.json();
+    const data = await response.json();
+
+    if (data.errors) {
+      throw data.errors;
+    }
+
+    return data;
+  } catch (err) {
+    console.log('err on fetch graphql', err);
+
+    throw err;
+  }
 };
 
 export default fetchQuery;
