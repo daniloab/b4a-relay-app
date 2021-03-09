@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, StatusBar, View, Text} from 'react-native';
 
 import Providers from './Providers';
-import SignUp from "../components/signUp/SignUp";
+import SignIn from "../components/signIn/SignIn";
 
 const App = () => {
   return (
@@ -17,9 +17,9 @@ const App = () => {
             marginTop: 100,
           }}>
           <Text style={{fontWeight: 'bold', textAlign: 'center'}}>
-            Back4App React Native Relay - Sign Up Flow
+            Back4App React Native Relay - Sign In Flow
           </Text>
-            <SignUp />
+          <SignIn />
         </View>
       </SafeAreaView>
     </Providers>

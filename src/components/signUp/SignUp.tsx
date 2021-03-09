@@ -7,7 +7,7 @@ import {useFormik, FormikProvider} from 'formik';
 import styled from 'styled-components';
 
 import SignUpMutation from './mutations/SignUpMutation';
-import {Environment} from '../../relay';
+import { Environment } from '../../relay';
 
 const TextInput = styled.TextInput``;
 
@@ -27,15 +27,16 @@ const SignUp = () => {
     SignUpMutation.commit({
       environment: Environment,
       input,
-      onCompleted: ({signUp}) => {
-        const {viewer} = signUp;
-        const {sessionToken, user} = viewer;
-
-        if (sessionToken !== null) {
-          alert(`user ${user.username} successfully created`);
-          setUserCreated(user);
-          return;
-        }
+      onCompleted: (response) => {
+        console.log(response);
+        // const {viewer} = response?.signUp;
+        // const {sessionToken, user} = viewer;
+        //
+        // if (sessionToken !== null) {
+        //   alert(`user ${user.username} successfully created`);
+        //   setUserCreated(user);
+        //   return;
+        // }
       },
       onError: (errors) => {
         console.log(errors);
